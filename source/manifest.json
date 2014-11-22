@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "Trello Short URL",
+  "description": "This extension provides a button on a trello card to copy the short url to the clipboard.",
+  "version": "1.0",
+
+  "content_scripts" : [
+    {
+      "matches" : [ "https://trello.com/*" ],
+      "js" : [
+        "TrelloShortUrl.js"
+      ]
+    }
+  ],
+
+  "permissions": [
+    "https://trello.com/",
+    "clipboardWrite"
+  ]
+}
