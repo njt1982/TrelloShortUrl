@@ -3,7 +3,7 @@
 
   "name": "Trello Short URL",
   "description": "This extension provides a button on a trello card to copy the short url to the clipboard.",
-  "version": "1.0",
+  "version": "0.1",
 
   "content_scripts" : [
     {
@@ -17,5 +17,11 @@
   "permissions": [
     "https://trello.com/",
     "clipboardWrite"
-  ]
+  ],
+
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
 }
