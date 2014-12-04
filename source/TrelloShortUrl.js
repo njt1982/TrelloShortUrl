@@ -6,7 +6,8 @@
     TrelloShortUrl = (function() {
       function TrelloShortUrl(config) {
         this.config = config;
-        this.actionSelector = ".window-sidebar .window-module:first-child .clearfix";
+        this.actionSelectorPrimary  = ".window-sidebar .other-actions .clearfix";
+        this.actionSelectorFallback = ".window-sidebar .window-module:first-child .clearfix";
         this.listen();
       }
 
@@ -40,8 +41,15 @@
           oldButton.remove();
         }
 
-        var actions, icon;
-        actions = document.querySelector(this.actionSelector);
+        var actions, icon, label;
+        actions = document.querySelector(this.actionSelectorPrimary);
+        if (actions == undefined) {
+          actions = document.querySelector(this.actionSelectorFallback);
+        }
+
+        if (actions == null) {
+          return;
+        }
 
         this.button = document.createElement("a");
         this.button.className = "button-link js-add-trello-short-url";
@@ -52,25 +60,32 @@
         icon = document.createElement("span");
         icon.className = "icon-sm icon-card";
         this.button.appendChild(icon);
-        this.button.appendChild(document.createTextNode(" Short URL"));
         this.button.addEventListener("click", this.buttonClick);
+
+        label = document.createElement("span");
+        label.className = "button-label";
+        label.innerHTML = " Short URL";
+        this.button.appendChild(label);
 
         return actions.insertBefore(this.button, actions.children[0]);
       };
 
       TrelloShortUrl.prototype.buttonClick = function(event) {
-        var _target = event.target;
+        var label = this.querySelector("span.button-label");
+        label.innerHTML = " Copied...";
 
-        cardId = _target.dataset.cardId;
+        cardId = this.dataset.cardId;
 
         var t = document.createElement('input');
         t.setAttribute('type', 'text');
         t.value = 'https://trello.com/c/' + cardId;
-        _target.appendChild(t);
+        this.appendChild(t);
         t.focus();
         t.select();
         document.execCommand('Copy', false, null);
         t.remove();
+
+        setTimeout(function() { label.innerHTML = " Short URL"; }, 750);
       };
 
       return TrelloShortUrl;
