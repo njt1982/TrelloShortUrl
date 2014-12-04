@@ -6,7 +6,7 @@
     TrelloShortUrl = (function() {
       function TrelloShortUrl(config) {
         this.config = config;
-        this.actionSelector = ".other-actions .clearfix";
+        this.actionSelector = ".window-sidebar .window-module:first-child .clearfix";
         this.listen();
       }
 
