@@ -3,7 +3,7 @@
 
   "name": "Trello Short URL",
   "description": "This extension provides a button on a trello card to copy the short url to the clipboard.",
-  "version": "0.2",
+  "version": "0.3",
 
   "content_scripts" : [
     {
