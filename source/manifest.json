@@ -4,7 +4,11 @@
   "name": "Trello Short URL",
   "description": "This extension provides a button on a trello card to copy the short url to the clipboard.",
   "version": "0.3",
-
+  
+  "web_accessible_resources": [
+	"urlchange.js"
+  ],
+  
   "content_scripts" : [
     {
       "matches" : [ "https://trello.com/*" ],
