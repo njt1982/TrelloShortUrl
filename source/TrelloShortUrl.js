@@ -17,8 +17,12 @@
         this.config = config;
         this.actionSelectorPrimary  = ".window-sidebar .other-actions .u-clearfix";
         this.actionSelectorFallback = ".window-sidebar .window-module:first-child .u-clearfix";
-        this.addButtonIfOnCard();
         this.listen();
+        (function (_this) {
+			setTimeout(function () {
+				_this.addButtonIfOnCard();
+			}, 1000);
+		})(this);
       }
 
       TrelloShortUrl.prototype.listen = function() {
