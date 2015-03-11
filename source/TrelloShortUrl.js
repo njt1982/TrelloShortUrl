@@ -1,5 +1,14 @@
 (function() {
 
+
+  var headID = document.getElementsByTagName("head")[0];         
+  var newScript = document.createElement('script');
+  newScript.type = 'text/javascript';
+  newScript.src = chrome.extension.getURL('urlchange.js');
+  headID.appendChild(newScript);
+  
+  
+
   (function() {
     var TrelloShortUrl;
 
@@ -9,12 +18,17 @@
         this.actionSelectorPrimary  = ".window-sidebar .other-actions .u-clearfix";
         this.actionSelectorFallback = ".window-sidebar .window-module:first-child .u-clearfix";
         this.listen();
+        (function (_this) {
+			setTimeout(function () {
+				_this.addButtonIfOnCard();
+			}, 1000);
+		})(this);
       }
 
       TrelloShortUrl.prototype.listen = function() {
         return window.addEventListener("message", (function(_this) {
           return function(event) {
-            if (event.data.trelloUrlChanged === null) {
+            if (! event.data.trelloUrlChanged) {
               return;
             }
             return _this.addButtonIfOnCard();
